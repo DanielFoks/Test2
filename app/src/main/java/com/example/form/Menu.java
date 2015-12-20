@@ -29,7 +29,10 @@ public class Menu extends Dialog implements OnClickListener{
     private Dialog dialog;
     public static double heightCenter;
 
-    private int qwe1;
+
+    private int NEW;
+    private int NEW2;
+
 
     private GridLayout.LayoutParams butParams;
 
