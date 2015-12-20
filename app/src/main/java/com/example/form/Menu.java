@@ -31,6 +31,7 @@ public class Menu extends Dialog implements OnClickListener{
 
 
     private int NEW;
+    private int NEW2;
 
 
     private GridLayout.LayoutParams butParams;
