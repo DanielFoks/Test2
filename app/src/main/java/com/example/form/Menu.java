@@ -15,6 +15,7 @@ import com.example.form.main.StaticField;
 import com.example.test2.R;
 
 public class Menu extends Dialog implements OnClickListener{
+    //qweqweqweqweqwe
 
 
     private int btnH;
