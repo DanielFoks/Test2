@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/menuMain"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:alpha="70">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="70"
+        android:background="#929292">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MENU"
+            android:id="@+id/textView4"
+            android:layout_centerInParent="true"
+            android:background="#929292" />
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/centerP"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:columnCount="2"
+        android:rowCount="2"
+        android:layout_gravity="center"
+        android:layout_weight="0.77"
+        android:useDefaultMargins="false"
+        android:alpha="70">
+        <Button
+            android:id="@+id/soundB"
+            android:background="@drawable/sound3" />
+        <Button
+            android:id="@+id/skinB"
+            android:background="@drawable/retry3" />
+        <Button
+            android:id="@+id/vkB"
+            android:background="@drawable/vk4" />
+        <Button
+            android:id="@+id/facebookB"
+            android:background="@drawable/facebook3" />
+    </GridLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTINUE"
+        android:id="@+id/continueButton"
+        android:background="#929292"
+        android:alpha="70" />
+
+</LinearLayout>

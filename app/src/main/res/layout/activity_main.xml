@@ -1,0 +1,87 @@
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.form.FormGame"
+    android:orientation="vertical"
+    android:id="@+id/parentPanel">
+
+    <RelativeLayout
+        android:layout_height="94dp"
+        android:layout_width="match_parent"
+        android:id="@+id/topPanel"
+        android:background="#2f2f2f"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textColor="#ffbebebe"
+            android:id="@+id/score"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:textSize="35dp"
+            />
+        <Button
+            android:id="@+id/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/menu"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/labelX"
+            android:textColor="#ffbebebe"
+            android:drawableRight="@drawable/squarex1"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textSize="35dp"/>
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:columnCount="5"
+        android:layout_width="match_parent"
+        android:layout_height="392dp"
+        android:id="@+id/mainPanel"
+        android:background="@drawable/grid1"
+        android:orientation="horizontal"
+        android:useDefaultMargins="false"
+        android:rowOrderPreserved="false"
+        android:columnOrderPreserved="false"
+        android:rowCount="5">
+
+
+    </GridLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:background="#2f2f2f"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Best Score:1124124"
+            android:id="@+id/bestScore"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:textColor="#ffbebebe"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>
+
+
