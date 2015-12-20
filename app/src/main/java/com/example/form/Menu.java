@@ -2,6 +2,7 @@ package com.example.form;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
