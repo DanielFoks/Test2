@@ -337,7 +337,7 @@ public class Field {
     public void restart() {
         Points.restart();
         fieldClear();
-        timerMain.setDelay(StaticField.speed);
+        timerMain.setDelay(StaticField.StartSpeed);
     }
 
     public void fieldClear() {
