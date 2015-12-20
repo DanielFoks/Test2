@@ -15,9 +15,6 @@ import com.example.form.main.StaticField;
 import com.example.test2.R;
 
 public class Menu extends Dialog implements OnClickListener{
-
-
-
     private int btnH;
     private int btnW;
 
@@ -31,7 +28,6 @@ public class Menu extends Dialog implements OnClickListener{
     private Button vkB;
     private Dialog dialog;
     public static double heightCenter;
-    //qweewqqweqwe
 
     private GridLayout.LayoutParams butParams;
 
