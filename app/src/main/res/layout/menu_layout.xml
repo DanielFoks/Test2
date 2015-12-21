@@ -4,23 +4,21 @@
     android:layout_height="match_parent"
     android:id="@+id/menuMain"
     android:orientation="vertical"
-    android:weightSum="1"
-    android:alpha="70">
+    android:weightSum="1">
 
     <RelativeLayout
         android:id="@+id/top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alpha="70"
         android:background="#929292">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MENU"
-            android:id="@+id/textView4"
+            android:id="@+id/menuView"
             android:layout_centerInParent="true"
-            android:background="#929292" />
+            />
     </RelativeLayout>
 
     <GridLayout
@@ -31,20 +29,24 @@
         android:rowCount="2"
         android:layout_gravity="center"
         android:layout_weight="0.77"
-        android:useDefaultMargins="false"
-        android:alpha="70">
+
+        android:background="@android:color/transparent">
         <Button
             android:id="@+id/soundB"
-            android:background="@drawable/sound3" />
+            android:background="@drawable/sound3"
+            android:alpha="0.2" />
         <Button
             android:id="@+id/skinB"
-            android:background="@drawable/retry3" />
+            android:background="@drawable/retry3"
+            android:alpha="0.2" />
         <Button
             android:id="@+id/vkB"
-            android:background="@drawable/vk4" />
+            android:background="@drawable/vk4"
+            android:alpha="0.2" />
         <Button
             android:id="@+id/facebookB"
-            android:background="@drawable/facebook3" />
+            android:background="@drawable/facebook3"
+            android:alpha="0.2" />
     </GridLayout>
 
     <Button
@@ -52,7 +54,6 @@
         android:layout_height="wrap_content"
         android:text="CONTINUE"
         android:id="@+id/continueButton"
-        android:background="#929292"
-        android:alpha="70" />
+        android:background="#4e4e4e" />
 
 </LinearLayout>

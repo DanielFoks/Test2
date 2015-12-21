@@ -2,7 +2,8 @@ package com.example.form;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -24,13 +25,12 @@ public class Menu extends Dialog implements OnClickListener{
     private LinearLayout mainL;
     private Button contB;
     private Button soundB;
-    private Button skinB;
+    private Button restartB;
     private Button facebookB;
     private Button vkB;
     private Dialog dialog;
     public static double heightCenter;
 
-    private GridLayout.LayoutParams butParams;
 
     public Menu(Context context) {
         super(context);
@@ -43,7 +43,8 @@ public class Menu extends Dialog implements OnClickListener{
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.menu_layout);
-        dialog.getWindow().setBackgroundDrawable(null);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         Size();
         createTop();
         createCenter();
@@ -62,41 +63,36 @@ public class Menu extends Dialog implements OnClickListener{
     public void onClick(View v) {
 
     }
-    private void createTop(){
+    private void createTop() {
         topP = (RelativeLayout) dialog.findViewById(R.id.top);
         LinearLayout.LayoutParams topPanelParams = (LinearLayout.LayoutParams) topP.getLayoutParams();
         topPanelParams.height= (int) FormGame.getHeightTopPanel();
         topP.setLayoutParams(topPanelParams);
+        topP.setAlpha(0);
+
 
     }
 
-    private void createCenter(){
+    private void createCenter() {
         centerP = (GridLayout) dialog.findViewById(R.id.centerP);
         LinearLayout.LayoutParams centerPanelParams = (LinearLayout.LayoutParams) centerP.getLayoutParams();
         centerPanelParams.height= (int) FormGame.getHeightMainPanel();
         centerP.setLayoutParams(centerPanelParams);
-        centerP.setAlpha((float) 0.3);
+        //centerP.setAlpha((float) 0.25);
 
         soundB =(Button) dialog.findViewById(R.id.soundB);
-        skinB = (Button) dialog.findViewById(R.id.skinB);
+        restartB = (Button) dialog.findViewById(R.id.skinB);
         facebookB = (Button) dialog.findViewById(R.id.facebookB);
         vkB = (Button) dialog.findViewById(R.id.vkB);
 
-        createGridlayoutP();
-        soundB.setLayoutParams(butParams);
-        soundB.setAlpha((float) 0.3);
+        soundB.setLayoutParams(butParams(1));
 
-        createGridlayoutP();
-        skinB.setLayoutParams(butParams);
-        skinB.setAlpha((float) 0.3);
+        restartB.setLayoutParams(butParams(2));
 
-        createGridlayoutP();
-        facebookB.setLayoutParams(butParams);
-        facebookB.setAlpha((float) 0.3);
+        vkB.setLayoutParams(butParams(3));
 
-        createGridlayoutP();
-        vkB.setLayoutParams(butParams);
-        vkB.setAlpha((float) 0.3);
+        facebookB.setLayoutParams(butParams(4));
+
 
 
     }
@@ -105,6 +101,7 @@ public class Menu extends Dialog implements OnClickListener{
         contB = (Button) dialog.findViewById(R.id.continueButton);
         LinearLayout.LayoutParams contParam = (LinearLayout.LayoutParams) contB.getLayoutParams();
         contParam.height= (int) FormGame.getHeightBottmPanel();
+        contB.setTextSize((float) (FormGame.getHeightBottmPanel()*0.1));
         contB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,14 +123,26 @@ public class Menu extends Dialog implements OnClickListener{
 
         btnH= (int) (Math.round(heightCenter / 2)-30);
         btnW= (Math.round(FormGame.getWidth() / 2)-30);
-
-        System.err.println(FormGame.getHeightTopPanel()+" "+FormGame.getHeightMainPanel()+" "+FormGame.getHeightBottmPanel()+"MENU");
     }
 
-    private void createGridlayoutP(){
-        butParams = new GridLayout.LayoutParams();
-        butParams.height=btnH;
-        butParams.width=btnW;
-        butParams.setMargins(10,10,10,10);
+    private GridLayout.LayoutParams butParams(int number){
+        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        params = new GridLayout.LayoutParams();
+        params.height=btnH;
+        params.width=btnW;
+        if (number==1){
+            params.setMargins(15,20,10,15);
+        }
+        else if (number==2){
+            params.setMargins(10,20,10,15);
+        }
+        else if (number==3){
+            params.setMargins(15,0,10,0);
+        }
+        else if (number==4){
+            params.setMargins(10, 0, 0, 0);
+        }
+
+        return params;
     }
 }

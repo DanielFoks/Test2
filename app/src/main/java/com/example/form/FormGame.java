@@ -8,6 +8,7 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -53,9 +54,6 @@ public class FormGame extends Activity {
     private TextView bestScore;
     private TextView labelX;
 
-    private Color color;
-
-
 
 
     @Override
@@ -76,6 +74,10 @@ public class FormGame extends Activity {
 
     private void menu() {
         buttonMenu =(Button) findViewById(R.id.menuButton);
+        RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) buttonMenu.getLayoutParams();
+        params.height= (int) (getHeightTopPanel()*0.70);
+        params.width=(int) (getHeightTopPanel()*0.70);
+        buttonMenu.setLayoutParams(params);
 
         buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,9 +173,6 @@ public class FormGame extends Activity {
         btnH=MainPanelWorkHeight/5;
         btnW=MainPanelWorkWidth/5;
 
-        System.err.println(FormGame.getHeightTopPanel()+" "+FormGame.getHeightMainPanel()+" "+FormGame.getHeightBottmPanel()+"FORMGAME");
-
-
     }
 
     private void buttonListener(final int row, final int col) {
@@ -229,7 +228,9 @@ public class FormGame extends Activity {
         createTopP();
 
         labelX = (TextView) findViewById(R.id.labelX);
+        labelX.setTextSize((float) (getHeightTopPanel()*0.17));
         score = (TextView) findViewById(R.id.score);
+        score.setTextSize((float) (getHeightTopPanel()*0.17));
 
     }
 
