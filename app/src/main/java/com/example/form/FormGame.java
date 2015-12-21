@@ -105,7 +105,6 @@ public class FormGame extends Activity {
                 params.height= (int) btnH;
                 params.width= (int) btnW;
                 params.setMargins(0, 0, 0, marginSizeH);
-                //buttonMass[i][j].setBackgroundColor(Color.rgb(146, 146, 146));
                 if(j==0){
                     params.setMargins(marginSizeW, 0, marginSizeW, marginSizeH);
                 }
@@ -139,7 +138,7 @@ public class FormGame extends Activity {
     {
         panelBottom = (RelativeLayout) findViewById(R.id.bottomPanel);
         LinearLayout.LayoutParams bottomPanelParams = (LinearLayout.LayoutParams) panelBottom.getLayoutParams();
-        bottomPanelParams.height=(int) heightBottomPanel;
+        bottomPanelParams.height=(int) getHeightBottmPanel()+5;
         panelBottom.setLayoutParams(bottomPanelParams);
 
         //customTextView(bestScore);
@@ -171,6 +170,9 @@ public class FormGame extends Activity {
 
         btnH=MainPanelWorkHeight/5;
         btnW=MainPanelWorkWidth/5;
+
+        System.err.println(FormGame.getHeightTopPanel()+" "+FormGame.getHeightMainPanel()+" "+FormGame.getHeightBottmPanel()+"FORMGAME");
+
 
     }
 

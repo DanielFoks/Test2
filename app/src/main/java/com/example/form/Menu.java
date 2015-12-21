@@ -43,7 +43,7 @@ public class Menu extends Dialog implements OnClickListener{
     private void init(Context context){
         dialog = new Dialog(context);
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.menu_layout);
         dialog.getWindow().setBackgroundDrawable(null);
         Size();
@@ -77,7 +77,7 @@ public class Menu extends Dialog implements OnClickListener{
         LinearLayout.LayoutParams centerPanelParams = (LinearLayout.LayoutParams) centerP.getLayoutParams();
         centerPanelParams.height= (int) FormGame.getHeightMainPanel();
         centerP.setLayoutParams(centerPanelParams);
-        centerP.setAlpha((float) 0.7);
+        centerP.setAlpha((float) 0.3);
 
         soundB =(Button) dialog.findViewById(R.id.soundB);
         skinB = (Button) dialog.findViewById(R.id.skinB);
@@ -124,6 +124,8 @@ public class Menu extends Dialog implements OnClickListener{
 
         btnH= (int) (Math.round(heightCenter / 2)-30);
         btnW= (Math.round(FormGame.getWidth() / 2)-30);
+
+        System.err.println(FormGame.getHeightTopPanel()+" "+FormGame.getHeightMainPanel()+" "+FormGame.getHeightBottmPanel()+"MENU");
     }
 
     private void createGridlayoutP(){
