@@ -2,6 +2,7 @@ package com.example.form;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -28,9 +29,6 @@ public class Menu extends Dialog implements OnClickListener{
     private Button vkB;
     private Dialog dialog;
     public static double heightCenter;
-
-    private int DimaLOX;
-    private int asdasd;
 
     private GridLayout.LayoutParams butParams;
 

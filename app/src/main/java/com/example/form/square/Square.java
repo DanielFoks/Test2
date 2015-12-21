@@ -13,6 +13,7 @@ public abstract class Square {
     protected int icon;
 
     private MyTimer timerTime;
+
     public Square(Position pos, int time) {
         this.row = pos.getRow();
         this.column = pos.getColumn();
@@ -35,8 +36,7 @@ public abstract class Square {
     }
 
     private void startCountTime() {
-        time = time - 100;
-        timerTime =new MyTimer(10);
+        timerTime = new MyTimer(10);
         timerTime.schedules(new TimerTask() {
             @Override
             public void run() {
@@ -44,13 +44,14 @@ public abstract class Square {
                     time = time - 10;
                 }
             }
-        });}
+        });
+    }
 
-    public void pause(){
+    public void pause() {
         timerTime.cancel();
     }
 
-    public void unPause(){
+    public void unPause() {
         timerTime = new MyTimer(10);
         timerTime.schedules(new TimerTask() {
             @Override

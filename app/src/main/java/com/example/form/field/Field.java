@@ -3,7 +3,13 @@ package com.example.form.field;
 import com.example.form.main.StaticField;
 import com.example.form.other.Points;
 import com.example.form.other.Position;
-import com.example.form.square.*;
+import com.example.form.square.MyTimer;
+import com.example.form.square.Square;
+import com.example.form.square.SquareCombo;
+import com.example.form.square.SquareLose;
+import com.example.form.square.SquareLow;
+import com.example.form.square.SquareNormal;
+import com.example.form.square.SquareX;
 
 import java.util.TimerTask;
 
@@ -38,7 +44,7 @@ public class Field {
      * Главный таймер решает когда появляться квадратам.
      */
     private void createSquare() {
-        timerMain = new MyTimer(2500);
+        timerMain = new MyTimer(StaticField.StartSpeed);
         mainTask = new TimerTask() {
             @Override
             public void run() {
@@ -108,15 +114,15 @@ public class Field {
     private void createMinusSquare() {
         if ((int) (Math.random() * 2) == 0) {
             position = getRandomPosition();
-            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, Integer.parseInt(String.valueOf(timerMain.getDelay())), -99, 0);
+            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, Integer.parseInt(String.valueOf(timerMain.getDelay())), -99, -1);
         }
         if ((int) (Math.random() * 3) == 0) {
             position = getRandomPosition();
-            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, (int) (Math.random() * 1000 + 600), -99, 0);
+            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, (int) (Math.random() * 1000 + 600), -99, -1);
         }
         if ((int) (Math.random() * 4) == 0) {
             position = getRandomPosition();
-            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, (int) (Math.random() * 1000 + 600), -99, 0);
+            arraySquare[position.getRow()][position.getColumn()] = new SquareNormal(position, (int) (Math.random() * 1000 + 600), -99, -1);
         }
     }
 
@@ -246,9 +252,9 @@ public class Field {
             }
 
         } else {
-            long timerMainDelay=timerMain.getDelay();
-            long timerEditDelay=timerEdit.getDelay();
-            long timerRemoveDelay=timerRemove.getDelay();
+            long timerMainDelay = timerMain.getDelay();
+            long timerEditDelay = timerEdit.getDelay();
+            long timerRemoveDelay = timerRemove.getDelay();
 
             mainTask = new TimerTask() {
                 @Override
@@ -337,7 +343,7 @@ public class Field {
     public void restart() {
         Points.restart();
         fieldClear();
-        timerMain.setDelay(StaticField.speed);
+        timerMain.setDelay(StaticField.StartSpeed);
     }
 
     public void fieldClear() {
