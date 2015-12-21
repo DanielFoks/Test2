@@ -84,15 +84,19 @@ public class Menu extends Dialog implements OnClickListener{
 
         createGridlayoutP();
         soundB.setLayoutParams(butParams);
+        soundB.setAlpha((float) 0.3);
 
         createGridlayoutP();
         skinB.setLayoutParams(butParams);
+        skinB.setAlpha((float) 0.3);
 
         createGridlayoutP();
         facebookB.setLayoutParams(butParams);
+        facebookB.setAlpha((float) 0.3);
 
         createGridlayoutP();
         vkB.setLayoutParams(butParams);
+        vkB.setAlpha((float) 0.3);
 
 
     }
