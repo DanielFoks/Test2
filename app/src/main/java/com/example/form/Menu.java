@@ -24,7 +24,7 @@ import com.example.form.main.StaticField;
 import com.example.test2.R;
 
 
-public class Menu extends Dialog implements OnClickListener{
+public class Menu extends Dialog implements OnClickListener {
     private int btnH;
     private int btnW;
 
@@ -46,7 +46,7 @@ public class Menu extends Dialog implements OnClickListener{
     }
 
 
-    private void init(Context context){
+    private void init(Context context) {
         dialog = new Dialog(context);
 
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -62,7 +62,7 @@ public class Menu extends Dialog implements OnClickListener{
 
     }
 
-    public void show(){
+    public void show() {
         dialog.show();
     }
 
@@ -70,10 +70,11 @@ public class Menu extends Dialog implements OnClickListener{
     public void onClick(View v) {
 
     }
+
     private void createTop() {
         topP = (RelativeLayout) dialog.findViewById(R.id.top);
         LinearLayout.LayoutParams topPanelParams = (LinearLayout.LayoutParams) topP.getLayoutParams();
-        topPanelParams.height= (int) FormGame.getHeightTopPanel();
+        topPanelParams.height = (int) FormGame.getHeightTopPanel();
         topP.setLayoutParams(topPanelParams);
         topP.setAlpha(0);
 
@@ -83,11 +84,11 @@ public class Menu extends Dialog implements OnClickListener{
     private void createCenter(final Context context) {
         centerP = (GridLayout) dialog.findViewById(R.id.centerP);
         LinearLayout.LayoutParams centerPanelParams = (LinearLayout.LayoutParams) centerP.getLayoutParams();
-        centerPanelParams.height= (int) FormGame.getHeightMainPanel();
+        centerPanelParams.height = (int) FormGame.getHeightMainPanel();
         centerP.setLayoutParams(centerPanelParams);
         //centerP.setAlpha((float) 0.25);
 
-        soundB =(Button) dialog.findViewById(R.id.soundB);
+        soundB = (Button) dialog.findViewById(R.id.soundB);
         restartB = (Button) dialog.findViewById(R.id.skinB);
         facebookB = (Button) dialog.findViewById(R.id.facebookB);
         vkB = (Button) dialog.findViewById(R.id.vkB);
@@ -118,13 +119,12 @@ public class Menu extends Dialog implements OnClickListener{
         });
 
 
-
     }
 
-    private void createButton(){
+    private void createButton() {
         contB = (Button) dialog.findViewById(R.id.continueButton);
         LinearLayout.LayoutParams contParam = (LinearLayout.LayoutParams) contB.getLayoutParams();
-        contParam.height= (int) FormGame.getHeightBottmPanel();
+        contParam.height = (int) FormGame.getHeightBottmPanel();
         contB.setTextSize((float) (FormGame.getHeightBottmPanel() * 0.1));
         contB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,38 +132,35 @@ public class Menu extends Dialog implements OnClickListener{
                 if (StaticField.start) {
                     StaticField.start = false;
                 }
-                Main.field.pause();
+                StaticField.field.pause();
                 dialog.dismiss();
             }
         });
     }
 
-    private void createParentL(){
+    private void createParentL() {
         mainL = (LinearLayout) dialog.findViewById(R.id.menuMain);
     }
 
-    private void Size(){
-        heightCenter= FormGame.getHeightMainPanel();
+    private void Size() {
+        heightCenter = FormGame.getHeightMainPanel();
 
-        btnH= (int) (Math.round(heightCenter / 2)-30);
-        btnW= (Math.round(FormGame.getWidth() / 2)-30);
+        btnH = (int) (Math.round(heightCenter / 2) - 30);
+        btnW = (Math.round(FormGame.getWidth() / 2) - 30);
     }
 
-    private GridLayout.LayoutParams butParams(int number){
+    private GridLayout.LayoutParams butParams(int number) {
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params = new GridLayout.LayoutParams();
-        params.height=btnH;
-        params.width=btnW;
-        if (number==1){
-            params.setMargins(15,20,10,15);
-        }
-        else if (number==2){
-            params.setMargins(10,20,10,15);
-        }
-        else if (number==3){
-            params.setMargins(15,0,10,0);
-        }
-        else if (number==4){
+        params.height = btnH;
+        params.width = btnW;
+        if (number == 1) {
+            params.setMargins(15, 20, 10, 15);
+        } else if (number == 2) {
+            params.setMargins(10, 20, 10, 15);
+        } else if (number == 3) {
+            params.setMargins(15, 0, 10, 0);
+        } else if (number == 4) {
             params.setMargins(10, 0, 0, 0);
         }
 

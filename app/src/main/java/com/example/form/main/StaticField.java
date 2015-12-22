@@ -1,7 +1,11 @@
 package  com.example.form.main;
 
 
+import android.app.Activity;
+import android.content.Context;
+
 import com.example.form.FormGame;
+import com.example.form.Menu;
 import com.example.form.field.Field;
 import com.example.form.square.Square;
 
@@ -16,5 +20,7 @@ public class StaticField{
     public static int sizeField = 5;
     public static FormGame form;
     private static Square[][] arraySquare;
-    public static Field field;
+    public static Field field = new Field(sizeField);
+    public static Context context;
+    public static Activity activity;
 }

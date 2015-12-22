@@ -12,9 +12,6 @@ import android.content.Context;
 import java.io.*;
 
 public class Main{
-    public static int sizeField = 5;
-    public static Field field = new Field(sizeField);
-
     public static void save(Context context) {
         FileOutputStream fos;
         try {

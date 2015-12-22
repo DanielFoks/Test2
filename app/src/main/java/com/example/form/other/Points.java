@@ -15,11 +15,10 @@ public class Points {
     public static void addPoints(int points) {
         Points.points = (Points.points + points * x);
         setMaxPoints();
-        if(Points.points < 0){
-            Main.field.restart();
+        if (Points.points < 0) {
+            StaticField.field.restart();
             StaticField.start = true;
-
-
+            FormGame.openMenu();
         }
     }
 
@@ -39,17 +38,17 @@ public class Points {
         return maxPoints;
     }
 
-    public static void restart(){
+    public static void restart() {
         x = 1;
         points = 0;
         maxPoints = 0;
     }
 
-    private static void setMaxPoints(){
-        if (points > maxPoints){
+    private static void setMaxPoints() {
+        if (points > maxPoints) {
             maxPoints = points;
         }
-        if(maxPoints > StaticField.record){
+        if (maxPoints > StaticField.record) {
             StaticField.record = maxPoints;
         }
     }
