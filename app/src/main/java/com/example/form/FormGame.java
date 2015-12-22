@@ -110,7 +110,7 @@ public class FormGame extends Activity {
                 params.width= (int) btnW;
                 params.setMargins(0, 0, 0, marginSizeH);
                 buttonMass[i][j].setTextColor(Color.rgb(174, 174, 174));
-                buttonMass[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
+                buttonMass[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP,25);
                 if(j==0){
                     params.setMargins(marginSizeW, 0, marginSizeW, marginSizeH);
                 }
