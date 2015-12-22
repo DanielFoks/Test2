@@ -1,7 +1,7 @@
 package com.example.form;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -10,7 +10,6 @@ import android.view.Display;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -23,7 +22,6 @@ import com.example.form.other.Points;
 import com.example.form.square.MyTimer;
 import com.example.test2.R;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class FormGame extends Activity {
@@ -34,9 +32,9 @@ public class FormGame extends Activity {
     private RelativeLayout panelBottom;
     private GridLayout panelCenter;
 
-    private Main main = new Main();
+    private  Main main = new Main();
     private int size = main.sizeField;
-    private Field field = main.field;
+    private  Field field = main.field;
     private Button[][] buttonMass = new Button[size][size];
 
     private Button buttonMenu;
@@ -56,8 +54,6 @@ public class FormGame extends Activity {
     private TextView bestScore;
     private TextView labelX;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +63,7 @@ public class FormGame extends Activity {
         addButton();
         repaintForm();
         menu();
-        openMenu();
+        openMenu(this);
 
         //createParentContainer();
         //setContentView(parentContainer);
@@ -84,14 +80,14 @@ public class FormGame extends Activity {
         buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenu();
+                openMenu(getContext());
             }
         });
     }
 
-    private void openMenu(){
+    public void openMenu(Context context){
         field.pause();
-        final Menu menu = new Menu(this);
+        final Menu menu = new Menu(context);
         menu.show();
     }
 
@@ -250,6 +246,7 @@ public class FormGame extends Activity {
 
                     @Override
                     public void run() {
+
                         labelX.setText(Points.getX() + " ");
 
                         score.setText(String.valueOf(Points.getPoints()) + " / ");
@@ -273,5 +270,9 @@ public class FormGame extends Activity {
                 });
             }
         });
+    }
+
+    public Context getContext(){
+        return this.getContext();
     }
 }

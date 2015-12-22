@@ -1,5 +1,9 @@
 package com.example.form.other;
 
+import android.content.Context;
+import android.content.Intent;
+
+import com.example.form.FormGame;
 import com.example.form.main.Main;
 import com.example.form.main.StaticField;
 
@@ -14,7 +18,8 @@ public class Points {
         if(Points.points < 0){
             Main.field.restart();
             StaticField.start = true;
-            //Main.form.openMenu();
+
+
         }
     }
 

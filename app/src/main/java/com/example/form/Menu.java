@@ -23,23 +23,6 @@ import com.example.form.main.Main;
 import com.example.form.main.StaticField;
 import com.example.test2.R;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URL;
 
 public class Menu extends Dialog implements OnClickListener{
     private int btnH;
@@ -114,7 +97,6 @@ public class Menu extends Dialog implements OnClickListener{
         restartB.setLayoutParams(butParams(2));
 
         vkB.setLayoutParams(butParams(3));
-        vkB.setBackgroundColor(0);
         vkB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
