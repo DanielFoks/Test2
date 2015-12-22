@@ -63,7 +63,7 @@ public class FormGame extends Activity {
         addButton();
         repaintForm();
         menu();
-        openMenu(this);
+        openMenu();
 
         //createParentContainer();
         //setContentView(parentContainer);
@@ -80,14 +80,14 @@ public class FormGame extends Activity {
         buttonMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMenu(getContext());
+                openMenu();
             }
         });
     }
 
-    public void openMenu(Context context){
+    public void openMenu(){
         field.pause();
-        final Menu menu = new Menu(context);
+        final Menu menu = new Menu(this);
         menu.show();
     }
 
@@ -270,9 +270,5 @@ public class FormGame extends Activity {
                 });
             }
         });
-    }
-
-    public Context getContext(){
-        return this.getContext();
     }
 }
