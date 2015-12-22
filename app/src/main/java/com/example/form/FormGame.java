@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -108,6 +109,8 @@ public class FormGame extends Activity {
                 params.height= (int) btnH;
                 params.width= (int) btnW;
                 params.setMargins(0, 0, 0, marginSizeH);
+                buttonMass[i][j].setTextColor(Color.rgb(174, 174, 174));
+                buttonMass[i][j].setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
                 if(j==0){
                     params.setMargins(marginSizeW, 0, marginSizeW, marginSizeH);
                 }
@@ -231,9 +234,9 @@ public class FormGame extends Activity {
         createTopP();
 
         labelX = (TextView) findViewById(R.id.labelX);
-        labelX.setTextSize((float) (getHeightTopPanel()*0.17));
+        labelX.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
         score = (TextView) findViewById(R.id.score);
-        score.setTextSize((float) (getHeightTopPanel()*0.17));
+        score.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
 
     }
 

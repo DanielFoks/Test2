@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import com.example.form.other.Points;
 import com.example.form.other.Position;
+import com.example.test2.R;
 
 public class SquareNormal extends Square{
     public SquareNormal(Position pos, int time) {
@@ -32,5 +33,6 @@ public class SquareNormal extends Square{
 
     @Override
     public void icon() {
+        icon= R.drawable.squarenormal;
     }
 }
