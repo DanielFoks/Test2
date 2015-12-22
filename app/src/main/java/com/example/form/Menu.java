@@ -1,13 +1,19 @@
 package com.example.form;
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -16,6 +22,24 @@ import android.widget.RelativeLayout;
 import com.example.form.main.Main;
 import com.example.form.main.StaticField;
 import com.example.test2.R;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.StatusLine;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URL;
 
 public class Menu extends Dialog implements OnClickListener{
     private int btnH;
@@ -47,7 +71,7 @@ public class Menu extends Dialog implements OnClickListener{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         Size();
         createTop();
-        createCenter();
+        createCenter(context);
 
         createButton();
 
@@ -73,7 +97,7 @@ public class Menu extends Dialog implements OnClickListener{
 
     }
 
-    private void createCenter() {
+    private void createCenter(final Context context) {
         centerP = (GridLayout) dialog.findViewById(R.id.centerP);
         LinearLayout.LayoutParams centerPanelParams = (LinearLayout.LayoutParams) centerP.getLayoutParams();
         centerPanelParams.height= (int) FormGame.getHeightMainPanel();
@@ -90,8 +114,26 @@ public class Menu extends Dialog implements OnClickListener{
         restartB.setLayoutParams(butParams(2));
 
         vkB.setLayoutParams(butParams(3));
+        vkB.setBackgroundColor(0);
+        vkB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebView vk = new WebView(context);
+                vk.getSettings().setJavaScriptEnabled(true);
+                vk.loadUrl("http://vk.com/");
+            }
+        });
+
 
         facebookB.setLayoutParams(butParams(4));
+        facebookB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                WebView facebook = new WebView(context);
+                facebook.getSettings().setJavaScriptEnabled(true);
+                facebook.loadUrl("https://www.facebook.com/");
+            }
+        });
 
 
 
@@ -101,11 +143,11 @@ public class Menu extends Dialog implements OnClickListener{
         contB = (Button) dialog.findViewById(R.id.continueButton);
         LinearLayout.LayoutParams contParam = (LinearLayout.LayoutParams) contB.getLayoutParams();
         contParam.height= (int) FormGame.getHeightBottmPanel();
-        contB.setTextSize((float) (FormGame.getHeightBottmPanel()*0.1));
+        contB.setTextSize((float) (FormGame.getHeightBottmPanel() * 0.1));
         contB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(StaticField.start){
+                if (StaticField.start) {
                     StaticField.start = false;
                 }
                 Main.field.pause();
