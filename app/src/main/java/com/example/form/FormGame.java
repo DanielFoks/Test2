@@ -174,6 +174,8 @@ public class FormGame extends Activity {
         btnH=MainPanelWorkHeight/5;
         btnW=MainPanelWorkWidth/5;
 
+        System.err.println(heightMainPanel+" "+marginSizeH+" "+marginSizeW+" "+width);
+
     }
 
     private void buttonListener(final int row, final int col) {
@@ -224,7 +226,6 @@ public class FormGame extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setSize();
         createBottomP();
         createTopP();
