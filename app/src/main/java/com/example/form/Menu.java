@@ -94,6 +94,21 @@ public class Menu extends Dialog implements OnClickListener {
         vkB = (Button) dialog.findViewById(R.id.vkB);
 
         soundB.setLayoutParams(butParams(1));
+        soundB.setBackgroundResource(StaticField.soundImg);
+        soundB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(StaticField.enableSound){
+                    StaticField.soundImg=R.drawable.nosound;
+                    StaticField.enableSound=false;
+                    soundB.setBackgroundResource(StaticField.soundImg);
+                }else{
+                    StaticField.soundImg=R.drawable.sound3;
+                    StaticField.enableSound=true;
+                    soundB.setBackgroundResource(StaticField.soundImg);
+                }
+            }
+        });
 
         restartB.setLayoutParams(butParams(2));
 

@@ -33,7 +33,6 @@
         android:background="@android:color/transparent">
         <Button
             android:id="@+id/soundB"
-            android:background="@drawable/sound3"
             android:alpha="0.2" />
         <Button
             android:id="@+id/skinB"
