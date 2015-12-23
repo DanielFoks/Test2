@@ -77,8 +77,6 @@ public class Menu extends Dialog implements OnClickListener {
         topPanelParams.height = (int) FormGame.getHeightTopPanel();
         topP.setLayoutParams(topPanelParams);
         topP.setAlpha(0);
-
-
     }
 
     private void createCenter(final Context context) {
