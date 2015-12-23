@@ -3,6 +3,7 @@ package com.example.form.square;
 import com.example.form.main.Main;
 import com.example.form.main.StaticField;
 import com.example.form.other.Position;
+import com.example.form.other.Sound;
 import com.example.test2.R;
 
 
@@ -17,7 +18,7 @@ public class SquareLow extends Square {
 
     @Override
     public void press() {
-        //Sound.playSound("sounds/SquareLow.wav");
+        Sound.playSound(R.raw.slow);
         StaticField.field.timerMainSlower(200);
     }
 

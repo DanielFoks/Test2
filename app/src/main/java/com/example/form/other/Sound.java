@@ -3,21 +3,32 @@ package com.example.form.other;
 
 import android.media.MediaPlayer;
 
-import com.example.form.FormGame;
 import com.example.form.main.StaticField;
-import com.example.test2.R;
-
-import static com.example.form.main.StaticField.context;
 
 public class Sound {
+static MediaPlayer mp;
+    static boolean playerStart = false;
+    public static synchronized void playSound(final int sound){
+        new Thread(){
+            public void run(){
+                if(!playerStart){
+                    playerStart=true;
+                    mp = MediaPlayer.create(StaticField.context, sound);
+                    mp.start();
+                }else{
+                    mp.stop();
+                    mp = MediaPlayer.create(StaticField.context, sound);
+                    mp.start();
+                }
 
-    public static void playSound(int sound){
-        try{
-            MediaPlayer mplayer = MediaPlayer.create(context,R.raw.combo);
-            mplayer.start();
-        }catch(Exception e){
-           e.printStackTrace();
-        }
-
-    }
-}
+                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                    @Override
+                    public void onCompletion(MediaPlayer mp) {
+                        mp.reset();
+                        mp.release();
+                        playerStart=false;
+                    }
+                });
+            }
+    }.start();
+}}

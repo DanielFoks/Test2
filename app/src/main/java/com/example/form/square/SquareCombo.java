@@ -1,5 +1,6 @@
 package com.example.form.square;
 
+import com.example.form.other.Sound;
 import com.example.test2.R;
 
 import com.example.form.main.StaticField;
@@ -14,7 +15,7 @@ public class SquareCombo extends Square{
 
     public void press() {
         StaticField.combo = true;
-        //Sound.playSound("sounds/SquareCombo.wav");
+        Sound.playSound(R.raw.combo);
     }
 
     public void remove() {

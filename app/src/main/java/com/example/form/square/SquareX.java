@@ -2,6 +2,7 @@ package com.example.form.square;
 
 import com.example.form.other.Points;
 import com.example.form.other.Position;
+import com.example.form.other.Sound;
 import com.example.test2.R;
 
 
@@ -12,7 +13,7 @@ public class SquareX extends Square {
 
     @Override
     public void press() {
-      //  Sound.playSound("sounds/SquareX.wav");
+        Sound.playSound(R.raw.xsound);
         Points.setX(Points.getX() + 1);
     }
 

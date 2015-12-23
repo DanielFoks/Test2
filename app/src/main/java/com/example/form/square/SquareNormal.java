@@ -21,7 +21,7 @@ public class SquareNormal extends Square{
     }
 
     public void press() {
-        Sound.playSound(1);
+        Sound.playSound(R.raw.normal);
         Points.addPoints(getPoint());
     }
 
