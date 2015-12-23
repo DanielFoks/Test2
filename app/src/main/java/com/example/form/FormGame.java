@@ -243,7 +243,8 @@ public class FormGame extends Activity {
         labelX.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         score = (TextView) findViewById(R.id.score);
         score.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
-        score.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+        bestScore= (TextView) findViewById(R.id.bestScore);
+
 
     }
 
@@ -260,8 +261,8 @@ public class FormGame extends Activity {
 
                         labelX.setText(Points.getX() + " ");
 
-                        score.setText(String.valueOf(Points.getPoints()) + " / ");
-                        score.setText(score.getText() + String.valueOf(Points.getMaxPoints()));
+                        score.setText(String.valueOf(Points.getPoints()));
+                        bestScore.setText("Best Score:13213" + "\n" + "\n" + "Best Score In This Game:"+String.valueOf(Points.getMaxPoints()));
 
 
                         for (int i = 0; i < size; i++) {

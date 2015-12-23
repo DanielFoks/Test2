@@ -75,7 +75,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Best Score:1124124"
             android:id="@+id/bestScore"
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
