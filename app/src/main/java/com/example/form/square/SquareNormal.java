@@ -4,6 +4,7 @@ import android.graphics.Color;
 
 import com.example.form.other.Points;
 import com.example.form.other.Position;
+import com.example.form.other.Sound;
 import com.example.test2.R;
 
 public class SquareNormal extends Square{
@@ -20,7 +21,7 @@ public class SquareNormal extends Square{
     }
 
     public void press() {
-       // Sound.playSound("sounds/SquareNorm.wav");
+        Sound.playSound(1);
         Points.addPoints(getPoint());
     }
 
