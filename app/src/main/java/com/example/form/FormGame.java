@@ -242,6 +242,7 @@ public class FormGame extends Activity {
         labelX = (TextView) findViewById(R.id.labelX);
         labelX.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         score = (TextView) findViewById(R.id.score);
+        score.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
         score.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
 
     }
