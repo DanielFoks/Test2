@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.form.FormGame"
     android:orientation="vertical"
-    android:id="@+id/parentPanel">
+    android:id="@+id/parentPanel"
+    android:background="#1b1b1b">
 
     <RelativeLayout
         android:layout_height="94dp"

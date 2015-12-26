@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -45,6 +46,7 @@ public class FormGame extends Activity {
     private static double heightTopPanel;
     private static double heightBottomPanel;
     private static double heightMainPanel;
+    private static double widthMainPanel;
     private double btnH;
     private double btnW;
     private double textHeigh;
@@ -100,9 +102,11 @@ public class FormGame extends Activity {
     }
 
     private void addButton() {
-        panelCenter = (GridLayout) findViewById(R.id.mainPanel);
+
         LinearLayout.LayoutParams mainPanelParams = (LinearLayout.LayoutParams) panelCenter.getLayoutParams();
         mainPanelParams.height = (int) heightMainPanel;
+        mainPanelParams.width=(int)widthMainPanel;
+        mainPanelParams.gravity=Gravity.CENTER;
         panelCenter.setLayoutParams(mainPanelParams);
 
 
@@ -151,6 +155,8 @@ public class FormGame extends Activity {
 
 
     private void setSize() {
+        panelCenter = (GridLayout) findViewById(R.id.mainPanel);
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -175,10 +181,27 @@ public class FormGame extends Activity {
 
         heightMainPanel = (marginSizeH*6)+((int)btnH)*5;
 
+        widthMainPanel=((marginSizeW*6)+((int)btnW)*5);
+
+
+
+        if (widthMainPanel<width){
+          btnW=141;
+          marginSizeW=10;
+        }
+
+        if(marginSizeW==0){
+            btnW=58;
+            marginSizeW=5;
+            panelCenter.setBackgroundResource(R.drawable.grid2);
+        }
+
+
         System.err.println((int)heightMainPanel + "-Высота панели " + marginSizeH + "-отступ по высоте " + marginSizeW + "-отступ по ширине " + width+"-ширина панели");
         System.err.println((int)btnH+"-высота кнопки "+(int)btnW+"-ширина кнопки");
         System.err.println((heightMainPanel / 400) * 5+"    "+marginSizeH);
         System.err.println("------------------"+((marginSizeH*6)+((int)btnH)*5));
+        System.err.println(((marginSizeW*6)+((int)btnW)*5));
 
     }
 
