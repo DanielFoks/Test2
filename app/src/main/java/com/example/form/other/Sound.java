@@ -8,6 +8,7 @@ import com.example.form.main.StaticField;
 public class Sound {
 private static MediaPlayer mp;
     static boolean playerStart = false;
+
     public static void playSound(final int sound){
         if(StaticField.enableSound){
             new Thread(){
@@ -33,4 +34,5 @@ private static MediaPlayer mp;
                 }
             }.start();
         }
-}}
+}
+}

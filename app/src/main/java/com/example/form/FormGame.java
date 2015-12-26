@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.media.AudioManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -54,22 +57,22 @@ public class FormGame extends Activity {
     private TextView bestScore;
     private TextView labelX;
 
+    private AudioManager audio;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StaticField.context = this;
         StaticField.activity = this;
+        audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         formCreate();
         addButton();
         repaintForm();
         menu();
         openMenu();
-
-        //createParentContainer();
-        //setContentView(parentContainer);
-
     }
+
 
     private void menu() {
         buttonMenu = (Button) findViewById(R.id.menuButton);
@@ -136,9 +139,6 @@ public class FormGame extends Activity {
         topPanelParams.height = (int) heightTopPanel;
         panelTop.setLayoutParams(topPanelParams);
 
-        /*customTextView(score);
-        customTextView(xView);*/
-
     }
 
     private void createBottomP() {
@@ -147,13 +147,8 @@ public class FormGame extends Activity {
         bottomPanelParams.height = (int) getHeightBottmPanel() + 5;
         panelBottom.setLayoutParams(bottomPanelParams);
 
-        //customTextView(bestScore);
     }
 
-    private void createParentContainer() {
-        parentContainer = (LinearLayout) findViewById(R.id.parentPanel);
-        parentContainer.setDrawingCacheEnabled(true);
-    }
 
     private void setSize() {
         Display display = getWindowManager().getDefaultDisplay();
@@ -178,7 +173,12 @@ public class FormGame extends Activity {
         btnH = MainPanelWorkHeight / 5;
         btnW = MainPanelWorkWidth / 5;
 
-        System.err.println(heightMainPanel + " " + marginSizeH + " " + marginSizeW + " " + width);
+        heightMainPanel = (marginSizeH*6)+((int)btnH)*5;
+
+        System.err.println((int)heightMainPanel + "-Высота панели " + marginSizeH + "-отступ по высоте " + marginSizeW + "-отступ по ширине " + width+"-ширина панели");
+        System.err.println((int)btnH+"-высота кнопки "+(int)btnW+"-ширина кнопки");
+        System.err.println((heightMainPanel / 400) * 5+"    "+marginSizeH);
+        System.err.println("------------------"+((marginSizeH*6)+((int)btnH)*5));
 
     }
 
@@ -191,28 +191,6 @@ public class FormGame extends Activity {
                 }
             }
         });
-    }
-
-
-    private void customTextView(View view) {
-        if (view == score) {
-            view = findViewById(R.id.score);
-            textHeigh = heightTopPanel * 0.7;
-        }
-        if (view == xView) {
-            view = findViewById(R.id.labelX);
-            textHeigh = heightTopPanel * 0.7;
-        }
-        if (view == bestScore) {
-            view = findViewById(R.id.bestScore);
-            textHeigh = heightBottomPanel * 0.7;
-        }
-
-
-        RelativeLayout.LayoutParams viewParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-        viewParams.height = (int) textHeigh;
-        view.setLayoutParams(viewParams);
-
     }
 
     public static double getHeightMainPanel() {
@@ -283,4 +261,22 @@ public class FormGame extends Activity {
             }
         });
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_RAISE, AudioManager.FLAG_SHOW_UI);
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                audio.adjustStreamVolume(AudioManager.STREAM_MUSIC,
+                        AudioManager.ADJUST_LOWER, AudioManager.FLAG_SHOW_UI);
+                return true;
+            default:
+                return false;
+        }
+    }
+
+
 }
