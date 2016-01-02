@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -21,7 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.form.field.Field;
-import com.example.form.main.Main;
+import com.example.form.main.Save;
 import com.example.form.main.StaticField;
 import com.example.form.other.Points;
 import com.example.form.square.MyTimer;
@@ -73,6 +72,7 @@ public class FormGame extends Activity {
         repaintForm();
         menu();
         openMenu();
+        Save.load(this);
     }
 
 
@@ -263,7 +263,7 @@ public class FormGame extends Activity {
                         labelX.setText(Points.getX() + " ");
 
                         score.setText(String.valueOf(Points.getPoints()));
-                        bestScore.setText("Best Score:13213" + "\n" + "\n" + "Best Score In This Game:"+String.valueOf(Points.getMaxPoints()));
+                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:"+String.valueOf(Points.getMaxPoints()));
 
 
                         for (int i = 0; i < size; i++) {

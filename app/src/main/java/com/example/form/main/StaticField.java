@@ -1,4 +1,4 @@
-package  com.example.form.main;
+package com.example.form.main;
 
 
 import android.app.Activity;
@@ -9,7 +9,7 @@ import com.example.form.field.Field;
 import com.example.form.square.Square;
 import com.example.test2.R;
 
-public class StaticField{
+public class StaticField {
     public static boolean pause = false;
     public static boolean combo = false;
     public static boolean start = true;
@@ -23,6 +23,6 @@ public class StaticField{
     public static Field field = new Field(sizeField);
     public static Context context;
     public static Activity activity;
-    public static boolean enableSound=true;
-    public static int soundImg= R.drawable.sound3;
+    public static boolean enableSound = true;
+    public static int soundImg = R.drawable.sound3;
 }

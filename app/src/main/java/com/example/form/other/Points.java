@@ -1,10 +1,7 @@
 package com.example.form.other;
 
-import android.content.Context;
-import android.content.Intent;
-
 import com.example.form.FormGame;
-import com.example.form.main.Main;
+import com.example.form.main.Save;
 import com.example.form.main.StaticField;
 
 public class Points {
@@ -50,6 +47,7 @@ public class Points {
         }
         if (maxPoints > StaticField.record) {
             StaticField.record = maxPoints;
+            Save.save(StaticField.context);
         }
     }
 }

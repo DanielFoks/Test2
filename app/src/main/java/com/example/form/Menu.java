@@ -1,15 +1,9 @@
 package com.example.form;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
-import android.os.Build;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -19,7 +13,6 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
-import com.example.form.main.Main;
 import com.example.form.main.StaticField;
 import com.example.test2.R;
 

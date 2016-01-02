@@ -9,7 +9,7 @@ import android.content.Context;
 
 import java.io.*;
 
-public class Main{
+public class Save {
     public static void save(Context context) {
         FileOutputStream fos;
         try {
