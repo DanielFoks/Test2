@@ -1,5 +1,6 @@
 package com.example.form;
 
+
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -77,7 +78,6 @@ public class Menu extends Dialog implements OnClickListener {
         LinearLayout.LayoutParams centerPanelParams = (LinearLayout.LayoutParams) centerP.getLayoutParams();
         centerPanelParams.height = (int) FormGame.getHeightMainPanel();
         centerP.setLayoutParams(centerPanelParams);
-        //centerP.setAlpha((float) 0.25);
 
         soundB = (Button) dialog.findViewById(R.id.soundB);
         restartB = (Button) dialog.findViewById(R.id.skinB);
@@ -131,11 +131,17 @@ public class Menu extends Dialog implements OnClickListener {
         contB = (Button) dialog.findViewById(R.id.continueButton);
         LinearLayout.LayoutParams contParam = (LinearLayout.LayoutParams) contB.getLayoutParams();
         contParam.height = (int) FormGame.getHeightBottmPanel();
-        contB.setTextSize((float) (FormGame.getHeightBottmPanel() * 0.1));
+        contParam.weight= FormGame.getWidth();
+if (StaticField.start){
+    contB.setBackgroundResource(R.drawable.start);
+}else{
+    contB.setBackgroundResource(R.drawable.cont);
+}
         contB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (StaticField.start) {
+
                     StaticField.start = false;
                 }
                 StaticField.field.pause();
@@ -156,16 +162,16 @@ public class Menu extends Dialog implements OnClickListener {
     }
 
     private GridLayout.LayoutParams butParams(int number) {
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
+        GridLayout.LayoutParams params;
         params = new GridLayout.LayoutParams();
         params.height = btnH;
         params.width = btnW;
         if (number == 1) {
-            params.setMargins(15, 20, 10, 15);
+            params.setMargins(10, 20, 10, 15);
         } else if (number == 2) {
             params.setMargins(10, 20, 10, 15);
         } else if (number == 3) {
-            params.setMargins(15, 0, 10, 0);
+            params.setMargins(10, 0, 10, 0);
         } else if (number == 4) {
             params.setMargins(10, 0, 0, 0);
         }

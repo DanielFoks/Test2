@@ -24,7 +24,7 @@
             android:id="@+id/score"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:textSize="35dp"
+            android:layout_marginLeft="5sp"
             />
         <Button
             android:id="@+id/menuButton"
@@ -45,7 +45,8 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textSize="35dp"
-            android:autoText="false" />
+            android:autoText="false"
+            android:layout_marginRight="5sp"/>
 
     </RelativeLayout>
 

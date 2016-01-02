@@ -51,8 +51,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONTINUE"
         android:id="@+id/continueButton"
-        android:background="#4e4e4e" />
+        android:background="@drawable/cont" />
 
 </LinearLayout>

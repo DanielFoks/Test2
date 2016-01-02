@@ -16,10 +16,8 @@ public class StaticField {
     public static int speed = 1500;
     public static final int StartSpeed = 1500;
     public static int record = 0;
-    public static int sound;
     public static int sizeField = 5;
     public static FormGame form;
-    private static Square[][] arraySquare;
     public static Field field = new Field(sizeField);
     public static Context context;
     public static Activity activity;
