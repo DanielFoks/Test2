@@ -28,6 +28,8 @@ public class Save {
 
     public static void load(Context context){
         FileInputStream fis = null;
+        File file = new File("data.dat");
+        boolean exists = file.exists();
 
         try {
             fis = context.openFileInput("data.dat");

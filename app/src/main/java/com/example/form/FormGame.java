@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -206,12 +207,13 @@ public class FormGame extends Activity {
     }
 
     private void buttonListener(final int row, final int col) {
-        buttonMass[row][col].setOnClickListener(new View.OnClickListener() {
+        buttonMass[row][col].setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
+            public boolean onTouch(View v, MotionEvent event) {
                 if (field.getArraySquare()[row][col] != null) {
                     field.removeSquare(row, col);
                 }
+                return false;
             }
         });
     }
@@ -264,8 +266,6 @@ public class FormGame extends Activity {
 
                         score.setText(String.valueOf(Points.getPoints()));
                         bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:"+String.valueOf(Points.getMaxPoints()));
-
-
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
                                 if (field.getArraySquare()[i][j] != null) {

@@ -28,6 +28,6 @@ public class SquareLow extends Square {
 
     @Override
     public void icon() {
-        icon = R.drawable.squarelose5;
+        icon = R.drawable.squareslow5;
     }
 }
