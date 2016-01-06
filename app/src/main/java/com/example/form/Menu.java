@@ -3,8 +3,11 @@ package com.example.form;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -46,6 +49,12 @@ public class Menu extends Dialog implements OnClickListener {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.menu_layout);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                StaticField.field.pause();
+            }
+        });
         Size();
         createTop();
         createCenter(context);
@@ -178,4 +187,5 @@ if (StaticField.start){
 
         return params;
     }
+
 }

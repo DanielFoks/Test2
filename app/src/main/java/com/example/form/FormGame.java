@@ -27,6 +27,7 @@ import com.example.form.other.Points;
 import com.example.form.square.MyTimer;
 import com.example.test2.R;
 
+
 import java.util.TimerTask;
 
 public class FormGame extends Activity {
@@ -301,5 +302,10 @@ public class FormGame extends Activity {
         }
     }
 
-
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        openMenu();
+    }
 }
