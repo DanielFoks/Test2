@@ -309,9 +309,4 @@ public class FormGame extends Activity {
         openMenu();
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        openMenu();
-    }
 }

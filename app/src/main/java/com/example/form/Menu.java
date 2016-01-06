@@ -168,6 +168,7 @@ if (StaticField.start){
 
         btnH = (int) (Math.round(heightCenter / 2) - 30);
         btnW = (Math.round(FormGame.getWidth() / 2) - 30);
+
     }
 
     private GridLayout.LayoutParams butParams(int number) {
@@ -175,14 +176,19 @@ if (StaticField.start){
         params = new GridLayout.LayoutParams();
         params.height = btnH;
         params.width = btnW;
+
+        int marginH= (int) (heightCenter-btnH*2)/3;
+        int marginW=(FormGame.getWidth()-btnW*2)/3;
+
+
         if (number == 1) {
-            params.setMargins(10, 20, 10, 15);
+            params.setMargins(marginW,marginH, marginW, marginH);
         } else if (number == 2) {
-            params.setMargins(10, 20, 10, 15);
+            params.setMargins(0,marginH, marginW, marginH);
         } else if (number == 3) {
-            params.setMargins(10, 0, 10, 0);
+            params.setMargins(marginW, 0, marginW, marginH);
         } else if (number == 4) {
-            params.setMargins(10, 0, 0, 0);
+            params.setMargins(0, 0, marginW, marginH);
         }
 
         return params;
