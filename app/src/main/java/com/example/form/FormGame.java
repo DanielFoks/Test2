@@ -308,4 +308,10 @@ public class FormGame extends Activity {
         super.onStop();
         openMenu();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        openMenu();
+    }
 }
