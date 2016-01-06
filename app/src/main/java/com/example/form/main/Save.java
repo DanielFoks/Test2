@@ -28,16 +28,20 @@ public class Save {
 
     public static void load(Context context){
         FileInputStream fis = null;
-        File file = new File("data.dat");
-        boolean exists = file.exists();
 
         try {
             fis = context.openFileInput("data.dat");
         } catch (FileNotFoundException e) {
+            save(StaticField.context);
+            try {
+                fis = context.openFileInput("data.dat");
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
             e.printStackTrace();
         }
-        ObjectInputStream oin = null;
 
+        ObjectInputStream oin = null;
         try {
             oin = new ObjectInputStream(fis);
         } catch (IOException e) {
