@@ -59,6 +59,7 @@ public class FormGame extends Activity {
     private TextView xView;
     private TextView bestScore;
     private TextView labelX;
+    public static Menu menu;
 
     private AudioManager audio;
 
@@ -69,11 +70,14 @@ public class FormGame extends Activity {
         StaticField.activity = this;
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
+
         formCreate();
         addButton();
         repaintForm();
         menu();
-        openMenu();
+        menu = new Menu(StaticField.context);
+        if(!menu.isShowing()){
+        openMenu();}
         Save.load(this);
     }
 
@@ -97,7 +101,6 @@ public class FormGame extends Activity {
         StaticField.field.pause();
         StaticField.activity.runOnUiThread(new Runnable() {
             public void run() {
-                Menu menu = new Menu(StaticField.context);
                 menu.show();
             }
         });
@@ -303,10 +306,12 @@ public class FormGame extends Activity {
     }
 
     @Override
-    protected void onStop()
-    {
-        super.onStop();
-        openMenu();
+    protected void onPause() {
+        super.onPause();
+        if(menu.isShowing()){
+/*menu.dismiss();*/
+        }else{
+            openMenu();
+        }
     }
-
 }
