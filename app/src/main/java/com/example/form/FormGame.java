@@ -275,6 +275,7 @@ public class FormGame extends Activity {
                                 if (field.getArraySquare()[i][j] != null) {
                                     buttonMass[i][j].setVisibility(View.VISIBLE);
                                     buttonMass[i][j].setText(String.valueOf(field.getSquareString(i, j)));
+                                    if(field.getSquareIcon(i, j) != 404)
                                     buttonMass[i][j].setBackgroundResource(field.getSquareIcon(i, j));
                                 } else {
                                     buttonMass[i][j].setVisibility(View.INVISIBLE);

@@ -229,7 +229,10 @@ public class Field {
     }
 
     public int getSquareIcon(int row, int col) {
-        return arraySquare[row][col].getIcon();
+        if (arraySquare[row][col] != null) {
+            return arraySquare[row][col].getIcon();
+        }
+        return 404;
     }
 
     public String getSquareString(int row, int col) {
