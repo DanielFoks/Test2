@@ -1,6 +1,7 @@
 package com.example.form.other;
 
 import com.example.form.FormGame;
+import com.example.form.MyApplication;
 import com.example.form.main.Save;
 import com.example.form.main.StaticField;
 
@@ -47,7 +48,7 @@ public class Points {
         }
         if (maxPoints > StaticField.record) {
             StaticField.record = maxPoints;
-            Save.save(StaticField.context);
+            Save.save(MyApplication.getAppContext());
         }
     }
 }

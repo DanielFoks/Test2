@@ -7,6 +7,8 @@ import java.io.IOException;
 import android.content.Context;
 
 
+import com.example.form.MyApplication;
+
 import java.io.*;
 
 public class Save {
@@ -32,7 +34,7 @@ public class Save {
         try {
             fis = context.openFileInput("data.dat");
         } catch (FileNotFoundException e) {
-            save(StaticField.context);
+            save(MyApplication.getAppContext());
             try {
                 fis = context.openFileInput("data.dat");
             } catch (FileNotFoundException e1) {

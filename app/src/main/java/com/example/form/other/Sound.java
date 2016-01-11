@@ -3,6 +3,7 @@ package com.example.form.other;
 
 import android.media.MediaPlayer;
 
+import com.example.form.MyApplication;
 import com.example.form.main.StaticField;
 
 public class Sound {
@@ -15,11 +16,11 @@ private static MediaPlayer mp;
                 public void run(){
                     if(!playerStart){
                         playerStart=true;
-                        mp = MediaPlayer.create(StaticField.context, sound);
+                        mp = MediaPlayer.create(MyApplication.getAppContext(), sound);
                         mp.start();
                     }else{
                         mp.stop();
-                        mp = MediaPlayer.create(StaticField.context, sound);
+                        mp = MediaPlayer.create(MyApplication.getAppContext(), sound);
                         mp.start();
                     }
 

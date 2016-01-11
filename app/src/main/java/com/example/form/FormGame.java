@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.Gravity;
@@ -59,15 +60,13 @@ public class FormGame extends Activity {
     private TextView xView;
     private TextView bestScore;
     private TextView labelX;
-    public static Menu menu;
+
 
     private AudioManager audio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StaticField.context = this;
-        StaticField.activity = this;
         audio = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
 
@@ -75,9 +74,8 @@ public class FormGame extends Activity {
         addButton();
         repaintForm();
         menu();
-        menu = new Menu(StaticField.context);
-        if(!menu.isShowing()){
-        openMenu();}
+
+
         Save.load(this);
     }
 
@@ -99,19 +97,23 @@ public class FormGame extends Activity {
 
     public static void openMenu() {
         StaticField.field.pause();
-        StaticField.activity.runOnUiThread(new Runnable() {
+        Handler mainHandler = new Handler(MyApplication.getAppContext().getMainLooper());
+
+        Runnable myRunnable = new Runnable() {
+            @Override
             public void run() {
-                menu.show();
+                StaticField.menu.show();
             }
-        });
+        };
+        mainHandler.post(myRunnable);
     }
 
     private void addButton() {
 
         LinearLayout.LayoutParams mainPanelParams = (LinearLayout.LayoutParams) panelCenter.getLayoutParams();
         mainPanelParams.height = (int) heightMainPanel;
-        mainPanelParams.width=(int)widthMainPanel;
-        mainPanelParams.gravity=Gravity.CENTER;
+        mainPanelParams.width = (int) widthMainPanel;
+        mainPanelParams.gravity = Gravity.CENTER;
         panelCenter.setLayoutParams(mainPanelParams);
 
 
@@ -184,29 +186,28 @@ public class FormGame extends Activity {
         btnH = MainPanelWorkHeight / 5;
         btnW = MainPanelWorkWidth / 5;
 
-        heightMainPanel = (marginSizeH*6)+((int)btnH)*5;
+        heightMainPanel = (marginSizeH * 6) + ((int) btnH) * 5;
 
-        widthMainPanel=((marginSizeW*6)+((int)btnW)*5);
+        widthMainPanel = ((marginSizeW * 6) + ((int) btnW) * 5);
 
 
-
-        if (widthMainPanel<width){
-          btnW=141;
-          marginSizeW=10;
+        if (widthMainPanel < width) {
+            btnW = 141;
+            marginSizeW = 10;
         }
 
-        if(marginSizeW==0){
-            btnW=58;
-            marginSizeW=5;
+        if (marginSizeW == 0) {
+            btnW = 58;
+            marginSizeW = 5;
             panelCenter.setBackgroundResource(R.drawable.grid2);
         }
 
 
-        System.err.println((int)heightMainPanel + "-Высота панели " + marginSizeH + "-отступ по высоте " + marginSizeW + "-отступ по ширине " + width+"-ширина панели");
-        System.err.println((int)btnH+"-высота кнопки "+(int)btnW+"-ширина кнопки");
-        System.err.println((heightMainPanel / 400) * 5+"    "+marginSizeH);
-        System.err.println("------------------"+((marginSizeH*6)+((int)btnH)*5));
-        System.err.println(((marginSizeW*6)+((int)btnW)*5));
+        System.err.println((int) heightMainPanel + "-Высота панели " + marginSizeH + "-отступ по высоте " + marginSizeW + "-отступ по ширине " + width + "-ширина панели");
+        System.err.println((int) btnH + "-высота кнопки " + (int) btnW + "-ширина кнопки");
+        System.err.println((heightMainPanel / 400) * 5 + "    " + marginSizeH);
+        System.err.println("------------------" + ((marginSizeH * 6) + ((int) btnH) * 5));
+        System.err.println(((marginSizeW * 6) + ((int) btnW) * 5));
 
     }
 
@@ -249,10 +250,13 @@ public class FormGame extends Activity {
         labelX = (TextView) findViewById(R.id.labelX);
         labelX.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         score = (TextView) findViewById(R.id.score);
-        score.setTextSize(TypedValue.COMPLEX_UNIT_SP,30);
-        bestScore= (TextView) findViewById(R.id.bestScore);
+        score.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+        bestScore = (TextView) findViewById(R.id.bestScore);
 
-
+        StaticField.menu = new Menu(this);
+        if (!StaticField.menu.isShowing()) {
+            openMenu();
+        }
     }
 
     private void repaintForm() {
@@ -269,14 +273,13 @@ public class FormGame extends Activity {
                         labelX.setText(Points.getX() + " ");
 
                         score.setText(String.valueOf(Points.getPoints()));
-                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:"+String.valueOf(Points.getMaxPoints()));
+                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:" + String.valueOf(Points.getMaxPoints()));
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
                                 if (field.getArraySquare()[i][j] != null) {
+                                    buttonMass[i][j].setBackgroundResource(field.getSquareIcon(i, j));
                                     buttonMass[i][j].setVisibility(View.VISIBLE);
                                     buttonMass[i][j].setText(String.valueOf(field.getSquareString(i, j)));
-                                    if(field.getSquareIcon(i, j) != 404)
-                                    buttonMass[i][j].setBackgroundResource(field.getSquareIcon(i, j));
                                 } else {
                                     buttonMass[i][j].setVisibility(View.INVISIBLE);
                                 }
@@ -309,9 +312,9 @@ public class FormGame extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(menu.isShowing()){
+        if (StaticField.menu.isShowing()) {
 /*menu.dismiss();*/
-        }else{
+        } else {
             openMenu();
         }
     }

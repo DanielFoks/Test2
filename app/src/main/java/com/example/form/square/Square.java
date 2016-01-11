@@ -36,12 +36,12 @@ public abstract class Square {
     }
 
     private void startCountTime() {
-        timerTime = new MyTimer(10);
+        timerTime = new MyTimer(100);
         timerTime.schedules(new TimerTask() {
             @Override
             public void run() {
                 if (time > 0) {
-                    time = time - 10;
+                    time = time - 100;
                 }
             }
         });
@@ -52,12 +52,12 @@ public abstract class Square {
     }
 
     public void unPause() {
-        timerTime = new MyTimer(10);
+        timerTime = new MyTimer(100);
         timerTime.schedules(new TimerTask() {
             @Override
             public void run() {
                 if (time > 0) {
-                    time = time - 10;
+                    time = time - 100;
                 }
             }
         });
