@@ -22,4 +22,8 @@ public class StaticField {
     public static Menu menu;
     public static boolean enableSound = true;
     public static int soundImg = R.drawable.sound3;
+
+    public static int getSpeedInfo(){
+        return 100 - (speed * 100)/StartSpeed;
+    }
 }

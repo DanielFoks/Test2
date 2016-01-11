@@ -273,7 +273,7 @@ public class FormGame extends Activity {
                         labelX.setText(Points.getX() + " ");
 
                         score.setText(String.valueOf(Points.getPoints()));
-                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:" + String.valueOf(Points.getMaxPoints()));
+                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:" + String.valueOf(Points.getMaxPoints() + "\n" + "Speed:" + String.valueOf(StaticField.getSpeedInfo())));
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
                                 if (field.getArraySquare()[i][j] != null) {
