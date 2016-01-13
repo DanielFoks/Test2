@@ -98,7 +98,6 @@ public class FormGame extends Activity {
     public static void openMenu() {
         StaticField.field.pause();
         Handler mainHandler = new Handler(MyApplication.getAppContext().getMainLooper());
-
         Runnable myRunnable = new Runnable() {
             @Override
             public void run() {

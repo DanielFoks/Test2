@@ -1,5 +1,8 @@
 package com.example.form.field;
 
+import android.os.Handler;
+
+import com.example.form.MyApplication;
 import com.example.form.main.StaticField;
 import com.example.form.other.Points;
 import com.example.form.other.Position;
@@ -11,6 +14,7 @@ import com.example.form.square.SquareLow;
 import com.example.form.square.SquareNormal;
 import com.example.form.square.SquareX;
 
+import java.util.Date;
 import java.util.TimerTask;
 
 /**
@@ -27,10 +31,8 @@ public class Field {
     private Position position;
     private MyTimer timerCombo;
 
-    private TimerTask mainTask;
-    private TimerTask editTask;
-    private TimerTask removeTask;
     private TimerTask comboTask;
+    private Date datePause;
 
     public Field(int size) {
         this.size = size;
@@ -45,59 +47,10 @@ public class Field {
      */
     private void createSquare() {
         timerMain = new MyTimer(StaticField.StartSpeed);
-        mainTask = new TimerTask() {
-            @Override
-            public void run() {
-                createNormalSquare();
-                createMinusSquare();
-            }
-        };
-        timerMain.schedules(mainTask);
+        timerMain.schedules(getMainTask());
 
         timerEdit = new MyTimer(200);
-        editTask = new TimerTask() {
-            @Override
-            public void run() {
-                if (!StaticField.combo) {
-                    createLoseSquare();
-                    createSlowSquare();
-                    createXSquare();
-                    createComboSquare();
-                } else {
-                    pause();
-                    fieldClear();
-                    StaticField.combo = false;
-
-                    for (int i = 0; i < 10; i++) {
-                        createNormalSquare();
-                    }
-                    for (int i = 0; i < 3; i++) {
-                        createMinusSquare();
-                    }
-
-                    timerCombo = new MyTimer(2500);
-                    comboTask = new TimerTask() {
-                        @Override
-                        public void run() {
-                            int minus = 0;
-                            for (int i = 0; i < arraySquare.length; i++) {
-                                for (int j = 0; j < arraySquare[i].length; j++) {
-                                    if (arraySquare[i][j] != null) {
-                                        minus = minus + arraySquare[i][j].getPoint();
-                                    }
-                                }
-                            }
-                            Points.addPoints(minus * (-1));
-                            timerCombo.cancel();
-                            fieldClear();
-                            pause();
-                        }
-                    };
-                    timerCombo.schedules(comboTask);
-                }
-            }
-        };
-        timerEdit.schedules(editTask);
+        timerEdit.schedules(getEditTask());
     }
 
     /**
@@ -180,16 +133,29 @@ public class Field {
         return new Position(row, col);
     }
 
-    private void timerMainFaster(int time) {
+    public void timerMainEditTime(int time) {
         timerMain.setDelay(timerMain.getDelay() - time);
         StaticField.speed = Integer.parseInt(String.valueOf(timerMain.getDelay()));
+        long timerMainDelay = timerMain.getDelay();
+        timerMain.cancel();
+        timerMain = new MyTimer(timerMainDelay);
+        timerMain.schedules(getMainTask());
     }
 
-    public void timerMainSlower(int time) {
-        timerMain.setDelay(timerMain.getDelay() + time);
-        StaticField.speed = Integer.parseInt(String.valueOf(timerMain.getDelay()));
+    public void timerMainEditTime(int time, long delay) {
+        if (!StaticField.combo) {
+            timerMain.setDelay(timerMain.getDelay() - time);
+            StaticField.speed = Integer.parseInt(String.valueOf(timerMain.getDelay()));
+            long timerMainDelay = timerMain.getDelay();
+            timerMain.cancel();
+            timerMain = new MyTimer(timerMainDelay);
+            if (delay > 0) {
+                timerMain.schedules(getMainTask(), delay);
+            } else {
+                timerMain.schedules(getMainTask(), 0);
+            }
+        }
     }
-
 
     /**
      * Проходит по всему полю. Если квадрат не пустой то проверяет его время.
@@ -197,29 +163,10 @@ public class Field {
      */
     private void removeSquare() {
         timerRemove = new MyTimer(100);
-        removeTask = new TimerTask() {
-            @Override
-            public void run() {
-                for (int i = 0; i < arraySquare.length; i++) {
-                    for (int j = 0; j < arraySquare[i].length; j++) {
-                        if (arraySquare[i][j] != null) {
-                            if (arraySquare[i][j].getTime() <= 0) {
-                                arraySquare[i][j].remove();
-                                arraySquare[i][j] = null;
-                            }
-                        }
-
-                    }
-                }
-            }
-        };
-        timerRemove.schedules(removeTask);
+        timerRemove.schedules(getRemoveTask());
     }
 
     public void removeSquare(int row, int col) {
-        if (!StaticField.combo) {
-            timerMainFaster(10);
-        }
         arraySquare[row][col].press();
         arraySquare[row][col] = null;
     }
@@ -238,6 +185,7 @@ public class Field {
 
     public void pause() {
         if (!StaticField.pause) {
+            datePause = new Date();
             timerMain.cancel();
             timerEdit.cancel();
             timerRemove.cancel();
@@ -256,84 +204,18 @@ public class Field {
             long timerEditDelay = timerEdit.getDelay();
             long timerRemoveDelay = timerRemove.getDelay();
 
-            mainTask = new TimerTask() {
-                @Override
-                public void run() {
-                    createNormalSquare();
-                    createMinusSquare();
-                }
-            };
-            removeTask = new TimerTask() {
-                @Override
-                public void run() {
-                    for (int i = 0; i < arraySquare.length; i++) {
-                        for (int j = 0; j < arraySquare[i].length; j++) {
-                            if (arraySquare[i][j] != null) {
-                                if (arraySquare[i][j].getTime() <= 0) {
-                                    arraySquare[i][j].remove();
-                                    arraySquare[i][j] = null;
-                                }
-                            }
-
-                        }
-                    }
-                }
-            };
-            editTask = new TimerTask() {
-                @Override
-                public void run() {
-                    if (!StaticField.combo) {
-                        createLoseSquare();
-                        createSlowSquare();
-                        createXSquare();
-                        createComboSquare();
-                    } else {
-                        pause();
-                        fieldClear();
-                        StaticField.combo = false;
-
-                        for (int i = 0; i < 10; i++) {
-                            createNormalSquare();
-                        }
-                        for (int i = 0; i < 3; i++) {
-                            createMinusSquare();
-                        }
-
-                        timerCombo = new MyTimer(2500);
-                        comboTask = new TimerTask() {
-                            @Override
-                            public void run() {
-                                int minus = 0;
-                                for (int i = 0; i < arraySquare.length; i++) {
-                                    for (int j = 0; j < arraySquare[i].length; j++) {
-                                        if (arraySquare[i][j] != null) {
-                                            minus = minus + arraySquare[i][j].getPoint();
-                                        }
-                                    }
-                                }
-                                Points.addPoints(minus * (-1));
-                                timerCombo.cancel();
-                                fieldClear();
-                                pause();
-                            }
-                        };
-                        timerCombo.schedules(comboTask);
-                    }
-                }
-            };
-
             timerMain = new MyTimer(timerMainDelay);
-            timerMain.schedules(mainTask);
+            timerMain.schedules(getMainTask());
             timerEdit = new MyTimer(timerEditDelay);
-            timerEdit.schedules(editTask);
+            timerEdit.schedules(getEditTask());
             timerRemove = new MyTimer(timerRemoveDelay);
-            timerRemove.schedules(removeTask);
+            timerRemove.schedules(getRemoveTask());
             StaticField.pause = false;
 
             for (Square[] anArraySquare : arraySquare) {
                 for (Square anAnArraySquare : anArraySquare) {
-                    if (anAnArraySquare != null) {
-                        anAnArraySquare.unPause();
+                    if (anAnArraySquare != null && datePause != null) {
+                        anAnArraySquare.unPause(datePause);
                     }
                 }
             }
@@ -352,5 +234,77 @@ public class Field {
                 arraySquare[i][j] = null;
             }
         }
+    }
+
+    private TimerTask getMainTask() {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                createNormalSquare();
+                createMinusSquare();
+            }
+        };
+    }
+
+    private TimerTask getRemoveTask() {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                for (int i = 0; i < arraySquare.length; i++) {
+                    for (int j = 0; j < arraySquare[i].length; j++) {
+                        if (arraySquare[i][j] != null) {
+                            if (arraySquare[i][j].getTime() <= 0) {
+                                arraySquare[i][j].remove();
+                                arraySquare[i][j] = null;
+                            }
+                        }
+
+                    }
+                }
+            }
+        };
+    }
+
+    private TimerTask getEditTask() {
+        return new TimerTask() {
+            @Override
+            public void run() {
+                if (!StaticField.combo) {
+                    createLoseSquare();
+                    createSlowSquare();
+                    createXSquare();
+                    createComboSquare();
+                } else {
+                    pause();
+                    fieldClear();
+
+                    for (int i = 0; i < 10; i++) {
+                        createNormalSquare();
+                    }
+                    for (int i = 0; i < 3; i++) {
+                        createMinusSquare();
+                    }
+
+                    Handler handler = new Handler(MyApplication.getAppContext().getMainLooper());
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            int minus = 0;
+                            for (int i = 0; i < arraySquare.length; i++) {
+                                for (int j = 0; j < arraySquare[i].length; j++) {
+                                    if (arraySquare[i][j] != null) {
+                                        minus = minus + arraySquare[i][j].getPoint();
+                                    }
+                                }
+                            }
+                            Points.addPoints(minus * (-1));
+                            fieldClear();
+                            pause();
+                            StaticField.combo = false;
+                        }
+                    }, 2500);
+                }
+            }
+        };
     }
 }

@@ -7,12 +7,16 @@ import java.util.TimerTask;
 public class MyTimer extends Timer {
     private long delay;
 
-    public MyTimer(long delay){
-        this.delay=delay;
+    public MyTimer(long delay) {
+        this.delay = delay;
     }
 
     public void schedules(TimerTask task) {
-        super.schedule(task, this.delay,this.delay);
+        super.schedule(task, this.delay, this.delay);
+    }
+
+    public void schedules(TimerTask task, long startDelay) {
+        super.schedule(task, startDelay, this.delay);
     }
 
     public long getDelay() {

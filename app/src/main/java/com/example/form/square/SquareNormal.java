@@ -1,13 +1,16 @@
 package com.example.form.square;
 
-import android.graphics.Color;
+import android.util.Log;
 
+import com.example.form.main.StaticField;
 import com.example.form.other.Points;
 import com.example.form.other.Position;
 import com.example.form.other.Sound;
 import com.example.test2.R;
 
-public class SquareNormal extends Square{
+import java.util.Date;
+
+public class SquareNormal extends Square {
     public SquareNormal(Position pos, int time) {
         super(pos, time);
     }
@@ -21,12 +24,15 @@ public class SquareNormal extends Square{
     }
 
     public void press() {
+        Date currTime = new Date();
+        long delay = StaticField.speed - (currTime.getTime() - date.getTime());
+        StaticField.field.timerMainEditTime(10, delay);
         Sound.playSound(R.raw.normal);
         Points.addPoints(getPoint());
     }
 
     public void remove() {
-        if(getPoint() > 0) {
+        if (getPoint() > 0) {
             Points.addPoints(-getPoint());
             Points.setX(1);
         }
@@ -34,6 +40,6 @@ public class SquareNormal extends Square{
 
     @Override
     public void icon() {
-        icon= R.drawable.squarenormal;
+        icon = R.drawable.squarenormal;
     }
 }

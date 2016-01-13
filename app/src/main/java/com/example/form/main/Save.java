@@ -28,7 +28,7 @@ public class Save {
         }
     }
 
-    public static void load(Context context){
+    public static void load(Context context) {
         FileInputStream fis = null;
 
         try {

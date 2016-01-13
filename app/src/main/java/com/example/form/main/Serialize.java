@@ -10,7 +10,7 @@ public class Serialize implements Serializable {
         record = StaticField.record;
     }
 
-    public void sendData(){
+    public void sendData() {
         StaticField.record = record;
     }
 }

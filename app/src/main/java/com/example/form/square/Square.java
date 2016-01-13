@@ -1,8 +1,14 @@
 package com.example.form.square;
 
 
+import android.graphics.Color;
+import android.os.Handler;
+
+import com.example.form.MyApplication;
+import com.example.form.main.StaticField;
 import com.example.form.other.Position;
 
+import java.util.Date;
 import java.util.TimerTask;
 
 public abstract class Square {
@@ -13,6 +19,8 @@ public abstract class Square {
     protected int icon;
 
     private MyTimer timerTime;
+    protected Date date;
+    private Handler handler;
 
     public Square(Position pos, int time) {
         this.row = pos.getRow();
@@ -31,36 +39,34 @@ public abstract class Square {
     }
 
     private void defaultOptions() {
+        date = new Date();
         startCountTime();
         icon();
     }
 
     private void startCountTime() {
-        timerTime = new MyTimer(100);
-        timerTime.schedules(new TimerTask() {
+        handler = new Handler(MyApplication.getAppContext().getMainLooper());
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (time > 0) {
-                    time = time - 100;
-                }
+                time = 0;
             }
-        });
+        }, time);
     }
 
     public void pause() {
-        timerTime.cancel();
+        handler.removeCallbacksAndMessages(null);
     }
 
-    public void unPause() {
-        timerTime = new MyTimer(100);
-        timerTime.schedules(new TimerTask() {
+    public void unPause(Date currTime) {
+        long delay = StaticField.speed - (currTime.getTime() - date.getTime());
+        handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (time > 0) {
-                    time = time - 100;
-                }
+                time = 0;
             }
-        });
+        }, delay);
     }
 
     public int getTime() {
