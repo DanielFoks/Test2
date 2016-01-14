@@ -134,6 +134,7 @@ public class Menu extends Dialog implements OnClickListener {
         facebookB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 WebView facebook = new WebView(context);
                 facebook.getSettings().setJavaScriptEnabled(true);
                 facebook.loadUrl("https://www.facebook.com/");
