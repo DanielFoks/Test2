@@ -311,9 +311,7 @@ public class FormGame extends Activity {
     @Override
     protected void onPause() {
         super.onPause();
-        if (StaticField.menu.isShowing()) {
-/*menu.dismiss();*/
-        } else {
+        if (!StaticField.pause) {
             openMenu();
         }
     }

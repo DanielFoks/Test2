@@ -98,19 +98,26 @@ public class Menu extends Dialog implements OnClickListener {
         soundB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(StaticField.enableSound){
-                    StaticField.soundImg=R.drawable.nosound;
-                    StaticField.enableSound=false;
+                if (StaticField.enableSound) {
+                    StaticField.soundImg = R.drawable.nosound;
+                    StaticField.enableSound = false;
                     soundB.setBackgroundResource(StaticField.soundImg);
-                }else{
-                    StaticField.soundImg=R.drawable.sound3;
-                    StaticField.enableSound=true;
+                } else {
+                    StaticField.soundImg = R.drawable.sound3;
+                    StaticField.enableSound = true;
                     soundB.setBackgroundResource(StaticField.soundImg);
                 }
             }
         });
 
         restartB.setLayoutParams(butParams(2));
+        restartB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StaticField.field.restart();
+            }
+        });
+
 
         vkB.setLayoutParams(butParams(3));
         vkB.setOnClickListener(new View.OnClickListener() {
@@ -140,17 +147,16 @@ public class Menu extends Dialog implements OnClickListener {
         contB = (Button) dialog.findViewById(R.id.continueButton);
         LinearLayout.LayoutParams contParam = (LinearLayout.LayoutParams) contB.getLayoutParams();
         contParam.height = (int) FormGame.getHeightBottmPanel();
-        contParam.weight= FormGame.getWidth();
-if (StaticField.start){
-    contB.setBackgroundResource(R.drawable.start);
-}else{
-    contB.setBackgroundResource(R.drawable.cont);
-}
+        contParam.weight = FormGame.getWidth();
+        if (StaticField.start) {
+            contB.setBackgroundResource(R.drawable.start);
+        } else {
+            contB.setBackgroundResource(R.drawable.cont);
+        }
         contB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (StaticField.start) {
-
                     StaticField.start = false;
                 }
                 StaticField.field.pause();
@@ -177,14 +183,14 @@ if (StaticField.start){
         params.height = btnH;
         params.width = btnW;
 
-        int marginH= (int) (heightCenter-btnH*2)/3;
-        int marginW=(FormGame.getWidth()-btnW*2)/3;
+        int marginH = (int) (heightCenter - btnH * 2) / 3;
+        int marginW = (FormGame.getWidth() - btnW * 2) / 3;
 
 
         if (number == 1) {
-            params.setMargins(marginW,marginH, marginW, marginH);
+            params.setMargins(marginW, marginH, marginW, marginH);
         } else if (number == 2) {
-            params.setMargins(0,marginH, marginW, marginH);
+            params.setMargins(0, marginH, marginW, marginH);
         } else if (number == 3) {
             params.setMargins(marginW, 0, marginW, marginH);
         } else if (number == 4) {
