@@ -51,13 +51,13 @@ public class FormGame extends Activity {
     private static double widthMainPanel;
     private double btnH;
     private double btnW;
-    private double textHeigh;
     private int marginSizeW;
     private int marginSizeH;
     private static int width;
+    private static int height;
+    private static float density;
 
     private TextView score;
-    private TextView xView;
     private TextView bestScore;
     private TextView labelX;
 
@@ -167,7 +167,8 @@ public class FormGame extends Activity {
         Point size = new Point();
         display.getSize(size);
         width = size.x;
-        int height = size.y;
+        height = size.y;
+        density = this.getResources().getDisplayMetrics().density;
 
         heightTopPanel = (height * 0.10);
         heightBottomPanel = (height * 0.25);
@@ -194,19 +195,11 @@ public class FormGame extends Activity {
             btnW = 141;
             marginSizeW = 10;
         }
-
         if (marginSizeW == 0) {
             btnW = 58;
             marginSizeW = 5;
             panelCenter.setBackgroundResource(R.drawable.grid2);
         }
-
-
-        System.err.println((int) heightMainPanel + "-Высота панели " + marginSizeH + "-отступ по высоте " + marginSizeW + "-отступ по ширине " + width + "-ширина панели");
-        System.err.println((int) btnH + "-высота кнопки " + (int) btnW + "-ширина кнопки");
-        System.err.println((heightMainPanel / 400) * 5 + "    " + marginSizeH);
-        System.err.println("------------------" + ((marginSizeH * 6) + ((int) btnH) * 5));
-        System.err.println(((marginSizeW * 6) + ((int) btnW) * 5));
 
     }
 
@@ -252,6 +245,14 @@ public class FormGame extends Activity {
         score.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
         bestScore = (TextView) findViewById(R.id.bestScore);
 
+        if(density<=1) {
+            bestScore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 25);
+        }else{
+            if(width<=500&&width>=470&&height<=820&&height>=790){
+                bestScore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
+            }else
+            bestScore.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+        }
         StaticField.menu = new Menu(this);
         if (!StaticField.menu.isShowing()) {
             openMenu();
@@ -272,7 +273,7 @@ public class FormGame extends Activity {
                         labelX.setText(Points.getX() + " ");
 
                         score.setText(String.valueOf(Points.getPoints()));
-                        bestScore.setText("Best Score:" + StaticField.record + "\n" + "\n" + "Best Score In This Game:" + String.valueOf(Points.getMaxPoints() + "\n" + "Speed:" + String.valueOf(StaticField.getSpeedInfo())));
+                        bestScore.setText("\n" +"Best Score: " + StaticField.record + "\n" + "\n" + "In This Game: " + String.valueOf(Points.getMaxPoints() + "\n"+ "\n" + "Speed: " + String.valueOf(StaticField.getSpeedInfo())+"%"+ "\n"));
                         for (int i = 0; i < size; i++) {
                             for (int j = 0; j < size; j++) {
                                 if (field.getArraySquare()[i][j] != null) {

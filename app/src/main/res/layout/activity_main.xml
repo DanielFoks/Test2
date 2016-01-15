@@ -78,10 +78,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:id="@+id/bestScore"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
             android:textColor="#ffbebebe"
-            />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="30sp"/>
     </RelativeLayout>
 
 
